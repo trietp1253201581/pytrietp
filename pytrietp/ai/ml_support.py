@@ -254,7 +254,10 @@ def cross_validation(
     train_scores = []
     val_scores = []
     if test_inputs is not None:
-        if num_classes is 
+        if num_classes is None:
+            test_preds = np.zeros((len(test_inputs), num_classes))
+        else:
+            test_preds = np.zeros((len(test_inputs), num_classes))
     else:
         test_preds = np.zeros((len(train_inputs), num_classes))
     for fold, (train_idx, val_idx) in enumerate(cv.split(train_inputs, train_targets)):
